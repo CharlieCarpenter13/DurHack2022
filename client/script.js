@@ -28,7 +28,7 @@ function GetBarOrder(bars, start, end) {
     }).then(resp => {
         //response = ordered array of college bars {name, time to next, coords}
         let url = `https://www.google.com/maps/embed/v1/directions?
-key=AIzaSyAaKfCdw4jDuY1rZcH_hMW3nCwKfM8uWLI
+key=AIzaSyDOXQHlw3intxn6i50F6SlD6g5CPxdPNtE
 &mode=walking
 &origin=${resp[0].coords}
 &destination=${resp[resp.length-1].coords}
@@ -138,7 +138,7 @@ function update_bar_crawl(){
     }).then(resp => resp.json()).then(resp => {
         //response = ordered array of college bars
         let url = `https://www.google.com/maps/embed/v1/directions?
-key=AIzaSyAaKfCdw4jDuY1rZcH_hMW3nCwKfM8uWLI
+key=AIzaSyDOXQHlw3intxn6i50F6SlD6g5CPxdPNtE
 &mode=walking
 &origin=${resp[0].coords}
 &destination=${resp[resp.length-1].coords}`

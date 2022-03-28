@@ -8,7 +8,7 @@ function work_out_all(new_bar, database_bar){
     for (let i = 0; i < database_bar.length; i++) {
         let bar = database_bar[i];
 
-        let url = 'https://maps.googleapis.com/maps/api/distancematrix/json?destinations=' + new_bar.coords + '&origins=' + bar.coords + '&units=imperial&key=AIzaSyAaKfCdw4jDuY1rZcH_hMW3nCwKfM8uWLI'
+        let url = 'https://maps.googleapis.com/maps/api/distancematrix/json?destinations=' + new_bar.coords + '&origins=' + bar.coords + '&units=imperial&key=AIzaSyDOXQHlw3intxn6i50F6SlD6g5CPxdPNtE'
         axios.get(url)
         .then(res => {
     
