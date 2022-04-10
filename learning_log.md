@@ -51,6 +51,8 @@
 - Whats next?
   - I want to try and impliment the following three technices for finding the shortest path that I want to further look into are firtstly bruit forcing it, I want to do this just so that I practices handling the data sets. Secondly Dijkstra's algorithm which I will then impliment using the skills that I have learnt from the frist implimentation.  Finaly I then want to further explore and look at external libarys.
   
+- Next steps?
+  - Chaning the sudo code into working progarming code.
 
 - program bruit force.
 - BFS - https://www.geeksforgeeks.org/shortest-distance-two-cells-matrix-grid/
