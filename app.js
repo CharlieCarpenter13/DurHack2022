@@ -5,6 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('./data.sql');
 
 
+
 // db.all("SELECT * FROM bars", [], (err, rows) => {
 //     console.log(rows) 
 // });
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 let d = require('./distances.js');
+let sp = require("./shortest_paths.js");
 const { array } = require('assert-plus');
 
 app.get('/bar/get', (req, res) => {
@@ -51,31 +53,32 @@ app.post('/bar/order', (req, res) => {
             }
         }
         //run python
-        //console.log(matrix)
-        let shortestBars;
-        const python = spawn('python', ['solver.py', JSON.stringify(matrix)]);
-        python.stdout.on('data', data => {
-            shortestBars = JSON.parse(data.toString());
-        });
-        python.on('close', (code) => {
+        console.log(matrix)
+        let shortestBars = sp.shortest(matrix)
+        // let shortestBars = sp.bruit_force(matrix);
+
             let orderedBars = []
             for (let i=0; i<shortestBars.length; i++) {
+                console.log(shortestBars)
+                console.log(matrix)
                 db.all("SELECT coords FROM bars WHERE name=?", [req.body.bars[i]], (err, coords) => {
                     db.all("SELECT duration FROM distances WHERE (bar1=? AND bar2=?) OR (bar2=? AND bar1=?)", [req.body.bars[i], req.body.bars[i+1], req.body.bars[i], req.body.bars[i+1]], (err, duration) => {
                         if (duration[0]) {
                             orderedBars.push({name: req.body.bars[i], coords: coords[0].coords, time: duration[0].duration})
                         } else {
                             orderedBars.push({name: req.body.bars[i], coords: coords[0].coords, time: null})
+                            console.log(orderedBars)
                             res.end(JSON.stringify(orderedBars))
+                            
                         }
                     })
                 })
             }
         })
     });
-});
 
-// this is used when adding vote to a poll.
+
+
 app.post('/bar/new', function (req, res) {
     let new_bar = req.body.new_bar;
 

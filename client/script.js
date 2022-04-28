@@ -26,6 +26,7 @@ function GetBarOrder(bars, start, end) {
         },
         body: JSON.stringify({bars, start, end})
     }).then(resp => {
+        console.log(resp)
         //response = ordered array of college bars {name, time to next, coords}
         let url = `https://www.google.com/maps/embed/v1/directions?
 key=AIzaSyDOXQHlw3intxn6i50F6SlD6g5CPxdPNtE
@@ -105,6 +106,7 @@ function creat_bar_selctor(bars){
 }
 
 function update_bar_crawl(){
+    console.log("this has been clicked")
     // write code that works out what bars have been clicked
     var bars_check = []
  
@@ -137,8 +139,9 @@ function update_bar_crawl(){
         body: JSON.stringify({bars: bars_check})
     }).then(resp => resp.json()).then(resp => {
         //response = ordered array of college bars
+        console.log("bhh")
         let url = `https://www.google.com/maps/embed/v1/directions?
-key=AIzaSyDOXQHlw3intxn6i50F6SlD6g5CPxdPNtE
+key=AIzaSyDE07jiOaqUF0siMk52mWhnKVyd1HD5PyQ
 &mode=walking
 &origin=${resp[0].coords}
 &destination=${resp[resp.length-1].coords}`
